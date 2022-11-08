@@ -1,6 +1,15 @@
 <template>
   <div>
     <HeaderCont />
+    <section class="main__cont">
+      <div class="main__inner">
+        <div class="container">
+          <div v-for="title in titles" v-bind:key="title.text">
+            {{ title.text }}
+          </div>
+        </div>
+      </div>
+    </section>
     <FooterCont />
   </div>
 </template>
@@ -13,5 +22,32 @@ export default {
     HeaderCont,
     FooterCont,
   },
+
+  data: function () {
+    return {
+      titles: [
+        { text: "we provide" },
+        { text: "visual coding" },
+        { text: "solutions" },
+        { text: "for you API" },
+      ],
+    };
+  },
 };
 </script>
+
+<style lang="scss">
+.main__inner {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  height: 100vh;
+  color: var(--black);
+
+  > div {
+    font-size: 9vw;
+    line-height: 0.9;
+  }
+}
+</style>
