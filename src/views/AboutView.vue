@@ -1,7 +1,7 @@
 <template>
   <div>
     <HeaderCont />
-    <TitleCont />
+    <TitleCont name="about" name2="reference" />
     <ContactCont />
     <FooterCont />
   </div>
