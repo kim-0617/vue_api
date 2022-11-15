@@ -161,7 +161,7 @@ export default {
 
     const RandomYoutube = () => {
       fetch(
-        "https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyDJeI0388YoRP3fpYU1B_GOG4UtfeWFhdw&maxResults=20&type=video"
+        "https://www.googleapis.com/youtube/v3/search?part=snippet&q=webstoryboy&key=AIzaSyDJeI0388YoRP3fpYU1B_GOG4UtfeWFhdw&maxResults=20&type=video"
       )
         .then((response) => response.json())
         .then((result) => {
