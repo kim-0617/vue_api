@@ -15,7 +15,7 @@
                 clickable: true,
               }"
               :autoplay="{
-                delay: 3000000,
+                delay: 2500,
                 disableOnInteraction: false,
               }"
               :modules="modules"

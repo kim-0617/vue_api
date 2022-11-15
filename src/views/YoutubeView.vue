@@ -20,7 +20,7 @@
                 },
               }"
               :autoplay="{
-                delay: 3000,
+                delay: 2500,
                 disableOnInteraction: false,
               }"
               :pagination="{
@@ -161,7 +161,7 @@ export default {
 
     const RandomYoutube = () => {
       fetch(
-        "https://www.googleapis.com/youtube/v3/search?part=snippet&q=webstoryboy&key=AIzaSyDJeI0388YoRP3fpYU1B_GOG4UtfeWFhdw&maxResults=20&type=video"
+        "https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyDJeI0388YoRP3fpYU1B_GOG4UtfeWFhdw&maxResults=20&type=video"
       )
         .then((response) => response.json())
         .then((result) => {
@@ -226,6 +226,7 @@ export default {
         overflow: hidden;
         text-overflow: ellipsis;
         margin-top: 5px;
+        font-size: 18px;
       }
     }
   }

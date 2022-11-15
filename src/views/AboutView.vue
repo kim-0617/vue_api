@@ -92,6 +92,7 @@ export default {
 #cont1 .text {
   font-size: 18px;
   margin-bottom: 25px;
+  color: #333;
 }
 
 #cont2 {
@@ -112,6 +113,7 @@ export default {
 
 #cont2 .text {
   width: 38%;
+  color: #333;
 }
 
 #cont3 {
@@ -131,11 +133,13 @@ export default {
 
 #cont3 .text {
   width: 43%;
+  color: #333;
 }
 
 .title {
   margin-bottom: 30px;
-  font-size: 18px;
+  font-size: 30px;
+  font-weight: bold;
 }
 
 .cont {
