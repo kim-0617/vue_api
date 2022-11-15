@@ -277,22 +277,23 @@ export default {
       background-size: cover;
       width: 300px;
       height: 550px;
+      border: 5px ridge rgb(105, 102, 102);
 
       .swiper-slide img {
         display: block;
         width: 100%;
+        height: 100px;
       }
 
       em {
         display: block;
         margin-top: 20px;
-        height: 80px;
         font-family: var(--font-kor);
       }
 
       .title {
         display: inline-block;
-        padding-left: 5px;
+        padding-left: 15px;
         // padding: 5px 0;
       }
 
