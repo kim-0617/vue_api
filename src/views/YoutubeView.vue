@@ -8,25 +8,21 @@
           <div class="youtube__slider">
             <h2>오늘의 추천영상</h2>
             <swiper
-              :slidesPerView="1"
-              :centeredSlides="false"
-              :slidesPerGroupSkip="1"
               :grabCursor="true"
-              :keyboard="{
-                enabled: true,
-              }"
-              :breakpoints="{
-                '769': {
-                  slidesPerView: 2,
-                  slidesPerGroup: 2,
+              :effect="'creative'"
+              :creativeEffect="{
+                prev: {
+                  shadow: true,
+                  translate: [0, 0, -400],
+                },
+                next: {
+                  translate: ['100%', 0, 0],
                 },
               }"
               :autoplay="{
                 delay: 3000,
                 disableOnInteraction: false,
               }"
-              :scrollbar="true"
-              :navigation="true"
               :pagination="{
                 clickable: true,
               }"
@@ -38,12 +34,12 @@
                   :href="`https://www.youtube.com/watch?v=${slider.id.videoId}`"
                 >
                   <img
-                    :src="slider.snippet.thumbnails.high.url"
+                    :src="slider.snippet.thumbnails.medium.url"
                     :alt="slider.snippet.title"
                   />
-                  <!-- <em>
+                  <em>
                     <span class="title">{{ slider.snippet.title }}</span>
-                  </em> -->
+                  </em>
                 </a>
               </swiper-slide>
             </swiper>
@@ -63,6 +59,15 @@
               </form>
             </div>
           </div>
+
+          <div class="cont__youtubeBtn">
+            <h2>오늘의 추천 키워드!</h2>
+            <ul className="youtube__btn">
+              <li @click="select" v-for="k in keyword" :key="k.name">
+                {{ k.name }}
+              </li>
+            </ul>
+          </div>
           <!-- 02 -->
 
           <div class="youtube__video">
@@ -72,7 +77,7 @@
                   :href="`https://www.youtube.com/watch?v=${youtube.id.videoId}`"
                 >
                   <img
-                    :src="youtube.snippet.thumbnails.high.url"
+                    :src="youtube.snippet.thumbnails.medium.url"
                     :alt="youtube.snippet.title"
                   />
                   <em>
@@ -122,6 +127,20 @@ export default {
     SwiperSlide,
   },
 
+  data() {
+    return {
+      keyword: [
+        { name: "spring" },
+        { name: "summer" },
+        { name: "fall" },
+        { name: "winter" },
+        { name: "ocean" },
+        { name: "mountain" },
+        { name: "dessert" },
+      ],
+    };
+  },
+
   setup() {
     const youtubes = ref([]);
     const sliders = ref([]);
@@ -142,7 +161,7 @@ export default {
 
     const RandomYoutube = () => {
       fetch(
-        "https://www.googleapis.com/youtube/v3/search?part=snippet&q=webstoryboy&key=AIzaSyDJeI0388YoRP3fpYU1B_GOG4UtfeWFhdw&maxResults=20&type=video"
+        "https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyDJeI0388YoRP3fpYU1B_GOG4UtfeWFhdw&maxResults=20&type=video"
       )
         .then((response) => response.json())
         .then((result) => {
@@ -160,6 +179,13 @@ export default {
       RandomYoutube,
       modules: [Autoplay, Keyboard, Scrollbar, Navigation, Pagination],
     };
+  },
+
+  methods: {
+    select: function (event) {
+      this.search = event.currentTarget.textContent;
+      this.SearchYoutube();
+    },
   },
 };
 </script>
@@ -183,6 +209,7 @@ export default {
       img {
         display: block;
         margin-bottom: 10px;
+        border-radius: 5px;
       }
 
       em {
@@ -209,7 +236,6 @@ export default {
 }
 .youtube__search {
   margin-top: 100px;
-  margin-bottom: 100px;
 
   .container {
     position: relative;
@@ -250,49 +276,104 @@ export default {
   h2 {
     color: var(--black);
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
   }
   .swiper {
     width: 100%;
-    height: 1000px;
+    height: 700px;
   }
   .swiper-slide img {
     display: block;
-    width: 100%;
+    width: 80%;
+    height: 80%;
+    margin: 0 auto;
+    border-radius: 5px;
   }
-  @media only screen and (min-width: 769px) {
-    .swiper-slide:first-child {
-      transition: transform 100ms;
-    }
 
-    .swiper-slide:first-child img {
-      transition: box-shadow 500ms;
-    }
+  em {
+    display: block;
+    margin-top: 20px;
+    font-family: var(--font-kor);
+    color: #000;
+    text-align: center;
 
-    .swiper-slide.swiper-slide-active:first-child {
-      transform: translateX(50%);
-      z-index: 2;
+    .title {
+      width: 70%;
+      display: inline-block;
+      padding-left: 15px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
+  }
 
-    .swiper-slide.swiper-slide-active:first-child img {
-      box-shadow: 0px 32px 80px rgba(0, 0, 0, 0.35);
-    }
+  // @media only screen and (min-width: 769px) {
+  //   .swiper-slide:first-child {
+  //     transition: transform 100ms;
+  //   }
 
-    .swiper-slide:nth-child(2) {
-      transition: transform 100ms;
-    }
+  //   .swiper-slide:first-child img {
+  //     transition: box-shadow 500ms;
+  //   }
 
-    .swiper-slide.swiper-slide-next:nth-child(2) {
-      transform: translateX(55%);
-      z-index: 1;
-    }
+  //   .swiper-slide.swiper-slide-active:first-child {
+  //     transform: translateX(50%);
+  //     z-index: 2;
+  //   }
 
-    .swiper[dir="rtl"] .swiper-slide.swiper-slide-active:first-child {
-      transform: translateX(-50%);
-    }
+  //   .swiper-slide.swiper-slide-active:first-child img {
+  //     box-shadow: 0px 32px 80px rgba(0, 0, 0, 0.35);
+  //   }
 
-    .swiper[dir="rtl"] .swiper-slide.swiper-slide-next:nth-child(2) {
-      transform: translateX(-55%);
+  //   .swiper-slide:nth-child(2) {
+  //     transition: transform 100ms;
+  //   }
+
+  //   // .swiper-slide.swiper-slide-next:nth-child(2) {
+  //   //   transform: translateX(55%);
+  //   //   z-index: 1;
+  //   // }
+
+  //   // .swiper[dir="rtl"] .swiper-slide.swiper-slide-active:first-child {
+  //   //   transform: translateX(-50%);
+  //   // }
+
+  //   // .swiper[dir="rtl"] .swiper-slide.swiper-slide-next:nth-child(2) {
+  //   //   transform: translateX(-55%);
+  //   // }
+  // }
+}
+
+.cont__youtubeBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 70px 0px;
+  h2 {
+    color: var(--black);
+    text-align: center;
+    margin: 25px 0;
+    font-weight: bold;
+  }
+
+  .youtube__btn {
+    display: flex;
+    li {
+      border: 1px solid #000;
+      padding: 5px 10px;
+      margin: 10px 5px;
+      color: var(--black);
+      cursor: pointer;
+      transition: all 300ms;
+
+      &:hover {
+        background-color: rgb(121, 118, 118);
+        color: rgb(245, 240, 240);
+      }
     }
   }
 }

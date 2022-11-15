@@ -8,16 +8,14 @@
           <div class="unsplash__slider">
             <h2>랜덤 이미지</h2>
             <swiper
-              :slidesPerView="3"
-              :spaceBetween="30"
-              :slidesPerGroup="3"
+              :effect="'cards'"
+              :grabCursor="true"
               :loop="true"
-              :loopFillGroupWithBlank="true"
               :pagination="{
                 clickable: true,
               }"
               :autoplay="{
-                delay: 3000,
+                delay: 3000000,
                 disableOnInteraction: false,
               }"
               :modules="modules"
@@ -25,7 +23,7 @@
             >
               <swiper-slide v-for="slider in sliders" :key="slider.id">
                 <a :href="slider.links.html">
-                  <img :src="slider.urls.raw" :alt="slider.id" />
+                  <img :src="slider.urls.small" :alt="slider.id" />
                 </a>
               </swiper-slide>
             </swiper>
@@ -60,7 +58,7 @@
             <ul>
               <li v-for="splash in splashes" :key="splash.id">
                 <a :href="splash.links.html">
-                  <img :src="splash.urls.regular" :alt="splash.id" />
+                  <img :src="splash.urls.small" :alt="splash.id" />
                 </a>
               </li>
             </ul>
@@ -86,9 +84,10 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/effect-cards";
 
 // import required modules
-import { Autoplay, Pagination } from "swiper";
+import { Autoplay, Pagination, EffectCards } from "swiper";
 
 import { ref } from "vue";
 export default {
@@ -163,7 +162,7 @@ export default {
       sliders,
       SearchSplash,
       RandomSplashes,
-      modules: [Autoplay, Pagination],
+      modules: [Autoplay, Pagination, EffectCards],
     };
   },
 
@@ -196,6 +195,7 @@ export default {
         display: block;
         height: 400px;
         margin-bottom: 10px;
+        border-radius: 5px;
       }
 
       em {
@@ -274,24 +274,36 @@ export default {
     font-weight: bold;
     margin-bottom: 20px;
   }
+
   .swiper {
-    width: 100%;
-    height: 650px;
-    .swiper-slide {
-      text-align: center;
-      font-size: 18px;
+    width: 400px;
+    height: 500px;
+  }
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+  .swiper-horizontal > .swiper-pagination-bullets,
+  .swiper-pagination-bullets.swiper-pagination-horizontal,
+  .swiper-pagination-custom,
+  .swiper-pagination-fraction {
+    bottom: -40px;
+  }
 
-    .swiper-slide img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+  .swiper-slide {
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
+  }
+
+  img {
+    display: block;
+    border-radius: 5px;
+    width: 400px;
+    height: 500px;
+    object-fit: cover;
   }
 }
 
@@ -300,6 +312,7 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-top: 70px;
   h2 {
     color: var(--black);
     text-align: center;

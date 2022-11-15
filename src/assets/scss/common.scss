@@ -61,8 +61,8 @@ body {
     transition: all 300ms;
 
     &:hover {
-      color: var(--black);
-      background-color: var(--white);
+      color: var(--white);
+      background-color: rgb(39, 36, 36);
     }
   }
 }
