@@ -201,6 +201,7 @@ export default {
       .title {
         display: inline-block;
         padding: 5px 0;
+        font-size: 18px;
       }
 
       .star {
@@ -294,6 +295,7 @@ export default {
       .title {
         display: inline-block;
         padding-left: 15px;
+        font-size: 18px;
         // padding: 5px 0;
       }
 
